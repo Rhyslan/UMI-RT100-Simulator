@@ -46,3 +46,4 @@ True Roll in degrees is found by $\frac{(W1-W2)×k}{2}\$, where k = 0.07415
 ## Sources
 - Robot 3D Model: https://grabcad.com/library/umi-rt100-1
 - Materials: https://www.cgbookcase.com/, https://3dtextures.me/
+- Robot conversion values: UMI RT100 User Manual (Physical Book)
