@@ -1,0 +1,384 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/UMI RT100.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Materials/WhiteStuccoWall02_MR_2K/White Stucco.material" type="Material" id=2]
+[ext_resource path="res://Materials/ParquetFlooring09_MR_2K/Parquet Flooring.material" type="Material" id=3]
+[ext_resource path="res://Code/Camera Select.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Positions.gd" type="Script" id=5]
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 3 )
+size = Vector2( 25, 25 )
+
+[sub_resource type="PlaneMesh" id=3]
+material = ExtResource( 2 )
+size = Vector2( 25, 25 )
+
+[sub_resource type="PlaneMesh" id=4]
+material = ExtResource( 2 )
+size = Vector2( 25, 25 )
+
+[sub_resource type="PlaneMesh" id=5]
+material = ExtResource( 2 )
+size = Vector2( 25, 25 )
+
+[sub_resource type="PlaneMesh" id=6]
+material = ExtResource( 2 )
+size = Vector2( 25, 25 )
+
+[node name="Main" type="Spatial"]
+
+[node name="Cameras" type="Spatial" parent="."]
+
+[node name="Main" type="Camera" parent="Cameras"]
+transform = Transform( 0.885507, -0.0976162, 0.454256, 0, 0.977681, 0.210096, -0.464626, -0.186042, 0.865743, 4.75126, 8.75431, 10.833 )
+current = true
+
+[node name="Top-Down" type="Camera" parent="Cameras"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 21.4857, -2.87839 )
+projection = 1
+size = 17.4632
+
+[node name="Right-Side" type="Camera" parent="Cameras"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.095, 7.445, -0.9 )
+projection = 1
+size = 14.74
+
+[node name="Left-Side" type="Camera" parent="Cameras"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.095, 7.445, -0.9 )
+projection = 1
+size = 14.74
+
+[node name="Room" type="Spatial" parent="."]
+
+[node name="Floor" type="MeshInstance" parent="Room"]
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="Wall N" type="MeshInstance" parent="Room"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 12.5, -12.5 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+
+[node name="Wall W" type="MeshInstance" parent="Room"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -12.5, 12.5, 0 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+
+[node name="Wall S" type="MeshInstance" parent="Room"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.5, 12.5 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../Wall E")
+
+[node name="Wall E" type="MeshInstance" parent="Room"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 12.5, 0 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+
+[node name="OmniLight" type="OmniLight" parent="Room"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.1102, 0.0531526 )
+light_specular = 1.0
+shadow_enabled = true
+omni_range = 23.0
+omni_shadow_mode = 0
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Positions" type="Control" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -424.0
+margin_bottom = 180.0
+script = ExtResource( 5 )
+
+[node name="Background" type="ColorRect" parent="Control/Positions"]
+margin_right = 424.0
+margin_bottom = 180.0
+color = Color( 0, 0, 0, 0.364706 )
+
+[node name="Zed" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 418.365
+margin_bottom = 25.0
+
+[node name="Z Label" type="Label" parent="Control/Positions/Zed"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Zed:"
+valign = 1
+
+[node name="Z Slider" type="HSlider" parent="Control/Positions/Zed"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -2767.0
+max_value = 0.0
+value = -19.0
+
+[node name="Z Value" type="Label" parent="Control/Positions/Zed"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: -19"
+valign = 1
+
+[node name="Z Reset" type="Button" parent="Control/Positions/Zed"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Shoulder" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 30.0
+margin_right = 418.365
+margin_bottom = 50.0
+
+[node name="S Label" type="Label" parent="Control/Positions/Shoulder"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Shoulder: "
+valign = 1
+
+[node name="S Slider" type="HSlider" parent="Control/Positions/Shoulder"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -2630.0
+max_value = 2630.0
+
+[node name="S Value" type="Label" parent="Control/Positions/Shoulder"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: 0"
+valign = 1
+
+[node name="S Reset" type="Button" parent="Control/Positions/Shoulder"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Elbow" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 55.0
+margin_right = 418.365
+margin_bottom = 75.0
+
+[node name="E Label" type="Label" parent="Control/Positions/Elbow"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Elbow:"
+valign = 1
+
+[node name="E Slider" type="HSlider" parent="Control/Positions/Elbow"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -2630.0
+max_value = 2206.0
+
+[node name="E Value" type="Label" parent="Control/Positions/Elbow"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: 0"
+valign = 1
+
+[node name="E Reset" type="Button" parent="Control/Positions/Elbow"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Yaw" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 80.0
+margin_right = 418.365
+margin_bottom = 100.0
+
+[node name="Y Label" type="Label" parent="Control/Positions/Yaw"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Yaw:"
+valign = 1
+
+[node name="Y Slider" type="HSlider" parent="Control/Positions/Yaw"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -1071.0
+max_value = 1071.0
+
+[node name="Y Value" type="Label" parent="Control/Positions/Yaw"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: 0"
+valign = 1
+
+[node name="Y Reset" type="Button" parent="Control/Positions/Yaw"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Pitch" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 105.0
+margin_right = 418.365
+margin_bottom = 125.0
+
+[node name="P Label" type="Label" parent="Control/Positions/Pitch"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Pitch:"
+valign = 1
+
+[node name="P Slider" type="HSlider" parent="Control/Positions/Pitch"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -4000.0
+max_value = 4000.0
+
+[node name="P Value" type="Label" parent="Control/Positions/Pitch"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: 0"
+valign = 1
+
+[node name="P Reset" type="Button" parent="Control/Positions/Pitch"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Roll" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 130.0
+margin_right = 418.365
+margin_bottom = 150.0
+
+[node name="R Label" type="Label" parent="Control/Positions/Roll"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Roll:"
+valign = 1
+
+[node name="R Slider" type="HSlider" parent="Control/Positions/Roll"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -4000.0
+max_value = 4000.0
+
+[node name="R Value" type="Label" parent="Control/Positions/Roll"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: 0"
+valign = 1
+
+[node name="R Reset" type="Button" parent="Control/Positions/Roll"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Gripper" type="Control" parent="Control/Positions"]
+margin_left = 5.0
+margin_top = 155.0
+margin_right = 418.365
+margin_bottom = 175.0
+
+[node name="G Label" type="Label" parent="Control/Positions/Gripper"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "Gripper:"
+valign = 1
+
+[node name="G Slider" type="HSlider" parent="Control/Positions/Gripper"]
+margin_left = 63.746
+margin_right = 263.746
+margin_bottom = 20.0
+min_value = -30.0
+max_value = 1220.0
+
+[node name="G Value" type="Label" parent="Control/Positions/Gripper"]
+margin_left = 266.937
+margin_right = 354.937
+margin_bottom = 20.0
+text = "Value: 0"
+valign = 1
+
+[node name="G Reset" type="Button" parent="Control/Positions/Gripper"]
+margin_left = 365.365
+margin_right = 413.365
+margin_bottom = 20.0
+text = "Reset"
+
+[node name="Camera Select" type="Control" parent="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -102.5
+margin_top = -30.0
+margin_right = 102.5
+script = ExtResource( 4 )
+
+[node name="Main" type="Button" parent="Control/Camera Select"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 50.0
+margin_bottom = 25.0
+text = "Main"
+
+[node name="Top" type="Button" parent="Control/Camera Select"]
+margin_left = 55.0
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 25.0
+text = "Top"
+
+[node name="Right" type="Button" parent="Control/Camera Select"]
+margin_left = 105.0
+margin_top = 5.0
+margin_right = 150.0
+margin_bottom = 25.0
+text = "Right"
+
+[node name="Left" type="Button" parent="Control/Camera Select"]
+margin_left = 155.0
+margin_top = 5.0
+margin_right = 200.0
+margin_bottom = 25.0
+text = "Left"
+
+[node name="UMI RT100" parent="." instance=ExtResource( 1 )]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -8.5 )
+
+[connection signal="value_changed" from="Control/Positions/Zed/Z Slider" to="Control/Positions" method="_on_Z_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Zed/Z Reset" to="Control/Positions" method="_on_Z_Reset_pressed"]
+[connection signal="value_changed" from="Control/Positions/Shoulder/S Slider" to="Control/Positions" method="_on_S_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Shoulder/S Reset" to="Control/Positions" method="_on_S_Reset_pressed"]
+[connection signal="value_changed" from="Control/Positions/Elbow/E Slider" to="Control/Positions" method="_on_E_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Elbow/E Reset" to="Control/Positions" method="_on_E_Reset_pressed"]
+[connection signal="value_changed" from="Control/Positions/Yaw/Y Slider" to="Control/Positions" method="_on_Y_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Yaw/Y Reset" to="Control/Positions" method="_on_Y_Reset_pressed"]
+[connection signal="value_changed" from="Control/Positions/Pitch/P Slider" to="Control/Positions" method="_on_P_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Pitch/P Reset" to="Control/Positions" method="_on_P_Reset_pressed"]
+[connection signal="value_changed" from="Control/Positions/Roll/R Slider" to="Control/Positions" method="_on_R_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Roll/R Reset" to="Control/Positions" method="_on_R_Reset_pressed"]
+[connection signal="value_changed" from="Control/Positions/Gripper/G Slider" to="Control/Positions" method="_on_G_Slider_value_changed"]
+[connection signal="pressed" from="Control/Positions/Gripper/G Reset" to="Control/Positions" method="_on_G_Reset_pressed"]
+[connection signal="pressed" from="Control/Camera Select/Main" to="Control/Camera Select" method="_on_Main_pressed"]
+[connection signal="pressed" from="Control/Camera Select/Top" to="Control/Camera Select" method="_on_Top_pressed"]
+[connection signal="pressed" from="Control/Camera Select/Right" to="Control/Camera Select" method="_on_Right_pressed"]
+[connection signal="pressed" from="Control/Camera Select/Left" to="Control/Camera Select" method="_on_Left_pressed"]
