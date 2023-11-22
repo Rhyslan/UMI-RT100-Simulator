@@ -243,8 +243,8 @@ valign = 1
 margin_left = 63.746
 margin_right = 263.746
 margin_bottom = 20.0
-min_value = -4000.0
-max_value = 4000.0
+min_value = -1315.0
+max_value = 50.0
 
 [node name="P Value" type="Label" parent="Control/Positions/Pitch"]
 margin_left = 266.937
@@ -275,8 +275,8 @@ valign = 1
 margin_left = 63.746
 margin_right = 263.746
 margin_bottom = 20.0
-min_value = -4000.0
-max_value = 4000.0
+min_value = -1775.0
+max_value = 2435.0
 
 [node name="R Value" type="Label" parent="Control/Positions/Roll"]
 margin_left = 266.937
