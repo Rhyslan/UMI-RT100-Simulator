@@ -4,7 +4,7 @@
 [ext_resource path="res://Materials/WhiteStuccoWall02_MR_2K/White Stucco.material" type="Material" id=2]
 [ext_resource path="res://Materials/ParquetFlooring09_MR_2K/Parquet Flooring.material" type="Material" id=3]
 [ext_resource path="res://Code/Camera Select.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Positions.gd" type="Script" id=5]
+[ext_resource path="res://Code/Positions.gd" type="Script" id=5]
 
 [sub_resource type="PlaneMesh" id=1]
 material = ExtResource( 3 )
